@@ -1,0 +1,32 @@
+# つくばチャレンジ 前輪サス 最適化入力パラメータ
+# role: design=最適化で動かす設計変数 / fixed=既存条件で固定 / measured=実測・選定が必要(TBDは最適化前に要入手)
+# unitはカラム名に記載。空欄 or TBD は最適化側で範囲探索、measured の TBD は CAD/実測で埋める
+name,unit,value,role,note
+R,mm,50,measured,径100mm オムニ確定 (ユーザー報告)
+h_target_min,mm,20,fixed,目標最低段差
+h_target_max,mm,40,fixed,目標最大段差 (60mm は h>R で幾何的不可能。40mm は suspension-assist+慣性 前提のストレッチ、保証は32mm)
+a,mm,70,design,pivot 前方距離 (Pareto 最良)
+b,mm,84,design,pivot 上方距離 (Pareto 最良, b/a=1.2)
+alpha_max,deg,40,design,最大圧縮角
+rho,-,0.9,design,shock lower mount のアーム上位置比 (Pareto 最良)
+x_u,mm,-40,design,shock upper mount x (pivot基準, Pareto 最良)
+z_u,mm,20,design,shock upper mount z (pivot基準, Pareto 最良)
+k_spring,N_per_mm,5.5,design,spring rate (sag 25% から逆算, 候補)
+preload,mm,0,design,spring preload
+c_comp,N_s_per_m,0,design,compression damping (初期は弱め §16)
+c_rebound,N_s_per_m,0,design,rebound damping
+z_bumpstop,mm,0,design,bump stop 介入点 (wheel travel)
+m_total,kg,20,measured,2026-09-21 ユーザー報告 ざっくり20kg
+front_static_load,N,34.3,measured,20kg×後輪比65%×2輪 分担の推定値 (CG確定で更新)
+rear_static_load,N,TBD,measured,残り荷重。モータ2.3kg×2は後方 → 後寄り推定
+wheelbase,mm,TBD,measured,
+track_front,mm,TBD,measured,
+mu_rear,-,0.8,measured,後輪タイヤ路面摩擦係数 (推定値)
+rear_wheel_radius,mm,93.5,measured,DDT M1502A_212 タイヤ径187mm/2
+rear_motor_stall_torque,Nm,17,measured,DDT M1502A_212 24V (定格9.6Nm)
+rear_motor_count,-,2,measured,後輪左右 1個ずつ想定 (要確認)
+shock_min_length,mm,TBD,measured,市販ショック候補の最小長 (ストローク制約: 探索で決める)
+shock_max_length,mm,TBD,measured,市販ショック候補の最大長
+shock_max_force,N,TBD,measured,
+body_clearance,mm,TBD,measured,車体干渉チェック用
+m_corner,kg,TBD,measured,ばね下+半分ばね上 質量 (リバウンド正確化に必要。オムニホイール+アーム実測)
